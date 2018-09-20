@@ -59,6 +59,7 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
       req.headers Authorization: "Basic #{auth}"
 
     msg.send "AUTH: #{auth}"
+    msg.send "REQ: #{req}"
 
     req.header('Content-Length', 0)
     req.post() (err, res, body) ->
