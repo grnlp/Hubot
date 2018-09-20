@@ -50,8 +50,9 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
 
     req = msg.http(path)
 
-    #msg.send "URL: #{url}"
-    #msg.send "PATH: #{path}"
+    msg.send "URL: #{url}"
+    msg.send "TOKEN: #{token}"
+    msg.send "PATH: #{path}"
 
     if process.env.HUBOT_JENKINS_AUTH
       auth = new Buffer(process.env.HUBOT_JENKINS_AUTH).toString('base64')
