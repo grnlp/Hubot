@@ -58,6 +58,8 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
       auth = new Buffer(process.env.HUBOT_JENKINS_AUTH).toString('base64')
       req.headers Authorization: "Basic #{auth}"
 
+    msg.send "AUTH: #{auth}"
+
     req.header('Content-Length', 0)
     req.post() (err, res, body) ->
         if err
