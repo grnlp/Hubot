@@ -50,23 +50,23 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
 
     req = msg.http(path)
 
-    msg.send "URL: #{url}"
-    msg.send "TOKEN: #{token}"
-    msg.send "PATH: #{path}"
+   # msg.send "URL: #{url}"
+   # msg.send "TOKEN: #{token}"
+   # msg.send "PATH: #{path}"
 
     if process.env.HUBOT_JENKINS_AUTH
       auth = new Buffer(process.env.HUBOT_JENKINS_AUTH).toString('base64')
       req.headers Authorization: "Basic #{auth}"
 
-    msg.send "AUTH: #{auth}"
-    msg.send "REQ: #{req}"
+    #msg.send "AUTH: #{auth}"
+    #msg.send "REQ: #{req}"
 
     req.header('Content-Length', 0)
     req.post() (err, res, body) ->
         if err
           msg.reply "Jenkins says: #{err}"
         else if 200 <= res.statusCode < 400 # Or, not an error code.
-          msg.reply "(#{res.statusCode}) Build started for #{job} #{url}/job/#{job}"
+          msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
         else if 400 == res.statusCode
           jenkinsBuild(msg, true)
         else if 404 == res.statusCode
