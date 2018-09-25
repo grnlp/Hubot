@@ -68,7 +68,7 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
           msg.reply ":jenkins_error:(甘市)エラーですがな～ 「 #{err}」"
         else if 200 <= res.statusCode < 400 # Or, not an error code.
           #msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
-          msg.reply ":jenkins:(甘市) デプロイを開始します～ 「#{job} #{url}/job/#{job}」"
+          msg.reply ":jenkins:(甘市) デプロイを開始します～ 「 #{url}/job/#{job}」"
         else if 400 == res.statusCode
           jenkinsBuild(msg, true)
         else if 404 == res.statusCode
