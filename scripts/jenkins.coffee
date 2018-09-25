@@ -64,15 +64,17 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
     req.header('Content-Length', 0)
     req.post() (err, res, body) ->
         if err
-          msg.reply "Jenkins says: #{err}"
+          #msg.reply "Jenkins says: #{err}"
+          msg.reply ":jenkins_error:(甘市)エラーですがな～ 「 #{err}」"
         else if 200 <= res.statusCode < 400 # Or, not an error code.
-          msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
+          #msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
+          msg.reply ":jenkins:(甘市) デプロイを開始します～ 「#{job} #{url}/job/#{job}」"
         else if 400 == res.statusCode
           jenkinsBuild(msg, true)
         else if 404 == res.statusCode
-          msg.reply "Build not found, double check that it exists and is spelt correctly."
+          msg.reply ":jenkins_error:(甘市)Jenkins上で対象ビルドが見つかりません。Slackに入力したコマンドを再確認するかJenkins管理者まで連絡下さい"
         else
-          msg.reply "Jenkins says: Status #{res.statusCode} #{body}"
+          msg.reply ":jenkins:(甘市)ステータス： 「#{res.statusCode} #{body}」"
 
 jenkinsDescribe = (msg) ->
     url = process.env.HUBOT_JENKINS_URL
