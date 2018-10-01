@@ -64,10 +64,8 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
     req.header('Content-Length', 0)
     req.post() (err, res, body) ->
         if err
-          #msg.reply "Jenkins says: #{err}"
           msg.reply ":jenkins_error:【ジョブ名：#{job}】エラーですよ～ 「 #{err} 」"
-        else if 200 <= res.statusCode < 400 # Or, not an error code.
-          #msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
+        else if 200 <= res.statusCode < 400
           msg.reply ":jenkins:【ジョブ名：#{job}】 デプロイを開始します～ 「 #{url}/job/#{job} 」"
         else if 400 == res.statusCode
           jenkinsBuild(msg, true)
