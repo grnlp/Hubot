@@ -70,7 +70,6 @@ jenkinsBuild = (msg, buildWithEmptyParameters) ->
           #msg.reply "(#{res.statusCode}) デプロイを開始しますよ～:jenkins:Build started for #{job} #{url}/job/#{job}"
           msg.reply ":jenkins:【ジョブ名：#{job}】 デプロイを開始します～ 「 #{url}/job/#{job} 」"
         else if 400 == res.statusCode
-         msg.send "通過１"
           jenkinsBuild(msg, true)
         else if 404 == res.statusCode
           msg.reply ":jenkins_error:【ジョブ名：#{job}】Jenkins上で対象ビルドが見つかりません。Slackに入力したコマンドを再確認するかJenkins管理者まで連絡下さい"
